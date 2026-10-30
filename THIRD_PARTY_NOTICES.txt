@@ -1,0 +1,19 @@
+Desk Watch CYD V1 is original code by Pr. BELAMINE MakerLab. It does not contain code from the
+"ESP32 CYD Weather Station" project. Third-party material:
+
+DejaVu Sans Bold (Font15.h, Font60.h)
+  These headers contain glyph bitmaps rendered from DejaVu Sans Bold.
+  Copyright (c) 2003 Bitstream, Inc. All Rights Reserved. DejaVu changes are in the public domain.
+  Bitstream Vera Fonts licence: free use and redistribution, including embedded in software,
+  provided this notice is kept. https://dejavu-fonts.github.io/License.html
+
+Libraries installed separately through the Arduino Library Manager (not redistributed here):
+  TFT_eSPI by Bodmer (BSD-style licence, see the library)
+  XPT2046_Touchscreen by Paul Stoffregen (MIT licence, see the library)
+  Arduino-ESP32 core by Espressif (LGPL 2.1)
+
+Pin assignments of the ESP32-2432S028R board are hardware facts documented by its manufacturer.
+
+ESP Web Tools 10.1.1 (flasher/vendor/esp-web-tools) - Apache License 2.0, Copyright Nabu Casa, Inc. https://github.com/esphome/esp-web-tools
+Improv Wi-Fi Serial protocol - https://www.improv-wifi.com (implemented in Improv.cpp)
+IANA Time Zone Database (tzdata) - public domain. Country/zone names and rules condensed into Desk_Watch_CYD_V1/TimeZones.h by tools/make_timezones.py. https://www.iana.org/time-zones
