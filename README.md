@@ -1,3 +1,5 @@
+![Desk Watch CYD: install in 1 click, no code](docs/4par3%20Installation%20ESP32%20en%20un%20clic,%20sans%20code.png)
+
 # Desk Watch CYD V1
 
 A desk companion for the **ESP32-2432S028R "Cheap Yellow Display" (CYD, 2.8" touchscreen)**.
