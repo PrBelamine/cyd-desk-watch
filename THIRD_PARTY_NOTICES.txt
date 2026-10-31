@@ -11,9 +11,21 @@ Libraries installed separately through the Arduino Library Manager (not redistri
   TFT_eSPI by Bodmer (BSD-style licence, see the library)
   XPT2046_Touchscreen by Paul Stoffregen (MIT licence, see the library)
   Arduino-ESP32 core by Espressif (LGPL 2.1)
+  ESP8266Audio by Earle F. Philhower, III (GPL-3.0; it bundles the libmad MP3 decoder (GPL-2.0+)) - used by Radio.cpp. Only the MP3 decoder is used.
+    The ready-made firmware.bin of edition 1.27 (flasher/desk-watch/1.27/) contains them, unmodified (ESP8266Audio 2.4.1),
+    and is therefore distributed under GPL-3.0 (licenses/GPL-3.0.txt). This repository is its corresponding source.
 
 Pin assignments of the ESP32-2432S028R board are hardware facts documented by its manufacturer.
 
 ESP Web Tools 10.1.1 (flasher/vendor/esp-web-tools) - Apache License 2.0, Copyright Nabu Casa, Inc. https://github.com/esphome/esp-web-tools
 Improv Wi-Fi Serial protocol - https://www.improv-wifi.com (implemented in Improv.cpp)
 IANA Time Zone Database (tzdata) - public domain. Country/zone names and rules condensed into Desk_Watch_CYD_V1/TimeZones.h by tools/make_timezones.py. https://www.iana.org/time-zones
+
+Open-Meteo (Weather page)
+-------------------------
+Weather data by Open-Meteo.com (https://open-meteo.com), licensed under CC BY 4.0.
+The free API is for non-commercial use; check their terms before selling a product that depends on it.
+
+Web radio streams
+-----------------
+The Hit Radio (Morocco) stream is a public Internet radio stream played for personal listening; it belongs to its station.
