@@ -1,6 +1,7 @@
 #include "DeskLogic.h"
 #include <math.h>
 #include <stdio.h>
+#include <string.h>
 
 uint8_t pomoWorkMinutes(int index) {
   if (index < 0) index = 0;
@@ -119,6 +120,43 @@ static const uint8_t PREVIEW_LEN[] = {10};
 const Tune BEEP_WORK_DONE = {"work done", WORK_DONE_NOTE, WORK_DONE_LEN, 6};
 const Tune BEEP_BREAK_DONE = {"break done", BREAK_DONE_NOTE, BREAK_DONE_LEN, 4};
 const Tune BEEP_PREVIEW_OK = {"ok", PREVIEW_NOTE, PREVIEW_LEN, 1};
+static const uint16_t CLIMATE_NOTE[] = {2000, 0, 2000, 0, 2000, 0};
+static const uint8_t CLIMATE_LEN[] = {12, 12, 12, 12, 12, 12};
+const Tune BEEP_CLIMATE = {"climate", CLIMATE_NOTE, CLIMATE_LEN, 6};
+
+RadioStation RADIOS[RADIO_COUNT] = {                    // factory list (Radios.h); the user's choice replaces it at start
+  {RADIO1_NAME, RADIO1_URL}, {RADIO2_NAME, RADIO2_URL}, {RADIO3_NAME, RADIO3_URL},
+};
+bool radioValid(const char* name, const char* url) {
+  if (!name || !url) return false;
+  const size_t n = strlen(name), u = strlen(url);
+  if (n < 1 || n > RADIO_NAME_MAX || u > RADIO_URL_MAX || !radioHttp(url)) return false;
+  for (size_t i = 0; i < n; ++i) if (name[i] < 0x20 || name[i] > 0x7E || name[i] == '"' || name[i] == '\\') return false;
+  if (name[0] == ' ' || name[n - 1] == ' ') return false;
+  for (size_t i = 0; i < u; ++i) if (url[i] <= 0x20 || url[i] > 0x7E || url[i] == '"' || url[i] == '\\') return false;
+  return true;
+}
+bool radioSet(int index, const char* name, const char* url) {
+  if (index < 0 || index >= RADIO_COUNT || !radioValid(name, url)) return false;
+  snprintf(RADIOS[index].name, sizeof RADIOS[index].name, "%s", name); snprintf(RADIOS[index].url, sizeof RADIOS[index].url, "%s", url);
+  return true;
+}
+void radioDefaults() {
+  radioSet(0, RADIO1_NAME, RADIO1_URL); radioSet(1, RADIO2_NAME, RADIO2_URL); radioSet(2, RADIO3_NAME, RADIO3_URL);
+}
+const char* alarmSoundName(int sound) {
+  if (sound >= 0 && sound < TUNE_COUNT) return TUNES[sound].name;
+  if (alarmSoundIsRadio(sound)) return RADIOS[alarmSoundStation(sound)].name;
+  return TUNES[0].name;
+}
+bool RadioWatch::update(uint32_t nowMs, bool playing) {
+  if (fallback) return false;
+  if (playing) { lastGoodMs = nowMs; return false; }
+  // Signed difference: the caller's 'now' can be a few ms older than the moment start() was called (same loop turn), which
+  // used to wrap around to a huge number and made the melody take over at once.
+  if ((int32_t)(nowMs - lastGoodMs) >= (int32_t)RADIO_FALLBACK_MS) { fallback = true; return true; }
+  return false;
+}
 
 // Typical CYD panel: raw 200..3800 on both axes with the XPT2046 library in rotation 1.
 TouchCal defaultTouchCal() {
@@ -149,11 +187,51 @@ void mapTouch(const TouchCal& c, int rx, int ry, int& x, int& y) {
   y = fy < 0 ? 0 : fy > 239 ? 239 : int(fy + 0.5f);
 }
 
+uint8_t SleepTimer::fadeLevel(uint32_t nowMs, uint8_t volume) const {
+  const uint32_t left = remaining(nowMs);
+  if (!active || left >= SLEEP_FADE_MS || volume <= 1) return volume;
+  const uint32_t v = (uint32_t(volume) * left + SLEEP_FADE_MS / 2) / SLEEP_FADE_MS;
+  return v < 1 ? 1 : uint8_t(v);
+}
+bool screenShouldSleep(uint8_t sleepIndex, uint32_t idleMs) {
+  if (sleepIndex == 0 || sleepIndex >= SCREEN_SLEEP_COUNT) return false;
+  return idleMs >= uint32_t(SCREEN_SLEEP_MIN[sleepIndex]) * 60000UL;
+}
 int wrapPage(int page) { return (page % PAGE_TOTAL + PAGE_TOTAL) % PAGE_TOTAL; }
-int pageFromFooter(int x) { const int p = x * PAGE_TOTAL / 320; return p < 0 ? 0 : p >= PAGE_TOTAL ? PAGE_TOTAL - 1 : p; }
+int row2Page(int index) { static const int order[ROW2_COUNT] = {PAGE_CLIMATE, PAGE_WEATHER, PAGE_RADIO, PAGE_SLEEP, PAGE_SETUP}; return order[index < 0 ? 0 : index >= ROW2_COUNT ? ROW2_COUNT - 1 : index]; }
+int pageRow(int page) { return page >= PAGE_SETUP ? 1 : 0; }
+int footerTarget(int row, int x) {
+  int slot = x * FOOTER_SLOTS / 320; slot = slot < 0 ? 0 : slot >= FOOTER_SLOTS ? FOOTER_SLOTS - 1 : slot;
+  if (row == 0) return slot < PAGE_SETUP ? slot : FOOT_DOWN;
+  if (slot < ROW2_COUNT) return row2Page(slot);
+  return slot == FOOTER_SLOTS - 1 ? FOOT_UP : FOOT_NONE;
+}
 int pageAfterSwipe(int current, int dx, int dy) {
-  if (abs(dx) >= 40 && abs(dx) > abs(dy)) return wrapPage(current + (dx < 0 ? 1 : -1));
-  return current;
+  if (!(abs(dx) >= 40 && abs(dx) > abs(dy))) return current;
+  const int step = dx < 0 ? 1 : -1;
+  if (pageRow(current) == 1) {
+    int i = 0; while (i < ROW2_COUNT - 1 && row2Page(i) != current) ++i;
+    return row2Page((i + step + ROW2_COUNT) % ROW2_COUNT);
+  }
+  const int n = PAGE_SETUP;                                                                // first row: Clock..Notes
+  return ((current + step) % n + n) % n;
+}
+
+bool decodeDht22(const uint8_t b[5], float& tempC, float& humPct) {
+  if (uint8_t(b[0] + b[1] + b[2] + b[3]) != b[4]) return false;
+  const float h = ((b[0] << 8) | b[1]) * 0.1f;
+  float t = (((b[2] & 0x7F) << 8) | b[3]) * 0.1f;
+  if (b[2] & 0x80) t = -t;
+  if (h < 0.0f || h > 100.0f || t < -40.0f || t > 80.0f) return false;
+  tempC = t; humPct = h; return true;
+}
+bool ClimateGuard::update(float t, float h, int tempMax, int humMax) {
+  bool started = false;
+  if (!tempHigh && t >= tempMax) { tempHigh = true; started = true; }
+  else if (tempHigh && t < tempMax - CLIMATE_HYSTERESIS_T) tempHigh = false;
+  if (!humHigh && h >= humMax) { humHigh = true; started = true; }
+  else if (humHigh && h < humMax - CLIMATE_HYSTERESIS_H) humHigh = false;
+  return started;
 }
 
 size_t formatTimer(char* out, size_t cap, uint32_t remainingMs) {

@@ -1,4 +1,4 @@
-Secrets.h
 .build/
 *.bin
 !flasher/desk-watch/firmware.bin
+!flasher/desk-watch/*/firmware.bin

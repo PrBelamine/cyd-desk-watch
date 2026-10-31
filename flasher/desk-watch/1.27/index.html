@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Desk Watch CYD 1.27</title>
+<script type="module" src="../../vendor/esp-web-tools/install-button.js"></script>
+<style>
+:root{--bg:#f6f7fb;--card:#fff;--ink:#16202e;--muted:#5b6778;--accent:#0a7cff;--line:#dfe3ec;--note:#ffe14d;--new:#0f9d58}
+@media (prefers-color-scheme:dark){:root{--bg:#10151d;--card:#18202b;--ink:#e8edf5;--muted:#9aa6b8;--accent:#4da3ff;--line:#2a3544;--new:#3ddc84}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+main{max-width:860px;margin:0 auto;padding:28px 16px 56px}
+a{color:var(--accent)}
+h1{font-size:1.9rem;margin:0 0 6px}
+.lead{color:var(--muted);margin:0 0 24px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;margin:0 0 18px}
+.card h2{font-size:1.1rem;margin:0 0 10px}
+.card h3{font-size:1rem;margin:18px 0 6px}
+ol,ul{margin:0;padding-left:1.2em} li{margin:6px 0}
+.install{display:flex;justify-content:center;padding:10px 0 4px}
+esp-web-install-button button{font:inherit;font-weight:600;padding:14px 26px;border:0;border-radius:10px;background:var(--accent);color:#fff;cursor:pointer;font-size:1.05rem}
+.note{background:var(--note);color:#3a2f00;border-radius:10px;padding:10px 14px;font-size:.95rem}
+.muted{color:var(--muted);font-size:.92rem}
+#unsupported{display:none}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:0 0 10px;flex-wrap:wrap}
+.lang{display:flex;gap:6px}
+.lang button{font:inherit;font-size:.9rem;padding:4px 12px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);cursor:pointer}
+.lang button[aria-pressed=true]{background:var(--accent);color:#fff;border-color:var(--accent)}
+.badge{display:inline-block;font-size:.78rem;font-weight:700;padding:1px 8px;border-radius:999px;background:var(--new);color:#04210f;margin-left:6px;vertical-align:middle}
+.gal{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;margin:0;padding:0;list-style:none}
+.gal figure{margin:0}
+.gal img{width:100%;height:auto;display:block;border-radius:8px;border:1px solid var(--line);background:#000}
+.gal figcaption{font-size:.9rem;color:var(--muted);margin-top:4px;text-align:center}
+.web{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin:0;padding:0;list-style:none}
+.web figure{margin:0;text-align:center}
+.web img{width:100%;max-width:300px;height:auto;border-radius:12px;border:1px solid var(--line);background:#0b0f15}
+.web figcaption{font-size:.9rem;color:var(--muted);margin-top:6px}
+details{margin-top:8px} summary{cursor:pointer;font-weight:600}
+code{background:var(--bg);padding:1px 6px;border-radius:5px}
+.back{font-size:.92rem}
+</style>
+</head>
+<body>
+<main>
+  <div class="top">
+    <a class="back" href="../index.html" data-t="back"></a>
+    <div class="lang" role="group" aria-label="Language / Langue">
+      <button type="button" data-lang="fr" aria-pressed="false">Français</button>
+      <button type="button" data-lang="en" aria-pressed="false">English</button>
+    </div>
+  </div>
+  <h1>Desk Watch CYD <span style="color:var(--accent)">1.27</span></h1>
+  <p class="lead" data-t="lead"></p>
+
+  <div class="card">
+    <h2 data-t="h_new"></h2>
+    <ul>
+      <li data-t="w1"></li>
+      <li data-t="w2"></li>
+      <li data-t="w3"></li>
+      <li data-t="w4"></li>
+      <li data-t="w5"></li>
+      <li data-t="w6"></li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2 data-t="h_install"></h2>
+    <ol>
+      <li data-t="s1"></li>
+      <li data-t="s2"></li>
+      <li data-t="s3"></li>
+    </ol>
+    <div class="install">
+      <esp-web-install-button manifest="manifest.json">
+        <button slot="activate" data-t="btn"></button>
+        <span slot="unsupported" id="unsupported" data-t="unsup"></span>
+        <span slot="not-allowed" data-t="https"></span>
+      </esp-web-install-button>
+    </div>
+    <p class="muted" style="text-align:center;margin:8px 0 0" data-t="browser"></p>
+  </div>
+
+  <div class="card">
+    <h2 data-t="h_pics"></h2>
+    <p class="muted" data-t="pics_note"></p>
+    <ul class="gal">
+      <li><figure><img data-img="clock" src="img/clock-en.png" width="320" height="240" loading="lazy" alt="" data-alt-fr="Heure" data-alt-en="Clock"><figcaption data-cap-fr="Heure" data-cap-en="Clock"></figcaption></figure></li>
+      <li><figure><img data-img="timer" src="img/timer-en.png" width="320" height="240" loading="lazy" alt="" data-alt-fr="Minuteur Pomodoro" data-alt-en="Pomodoro timer"><figcaption data-cap-fr="Minuteur Pomodoro" data-cap-en="Pomodoro timer"></figcaption></figure></li>
+      <li><figure><img data-img="stopwatch" src="img/stopwatch-en.png" width="320" height="240" loading="lazy" alt="" data-alt-fr="Chronomètre" data-alt-en="Stopwatch"><figcaption data-cap-fr="Chronomètre" data-cap-en="Stopwatch"></figcaption></figure></li>
+      <li><figure><img data-img="counter" src="img/counter-en.png" width="320" height="240" loading="lazy" alt="" data-alt-fr="Compteur" data-alt-en="Counter"><figcaption data-cap-fr="Compteur" data-cap-en="Counter"></figcaption></figure></li>
+      <li><figure><img data-img="alarm" src="img/alarm-en.png" width="320" height="240" loading="lazy" alt="" data-alt-fr="Alarme (mélodies ou radio)" data-alt-en="Alarm (melodies or radio)"><figcaption data-cap-fr="Alarme (mélodies ou radio)" data-cap-en="Alarm (melodies or radio)"></figcaption></figure></li>
+      <li><figure><img data-img="notes" src="img/notes-en.png" width="320" height="240" loading="lazy" alt="" data-alt-fr="Post-it numérique (18 tâches)" data-alt-en="Digital Post-it (18 tasks)"><figcaption data-cap-fr="Post-it numérique (18 tâches)" data-cap-en="Digital Post-it (18 tasks)"></figcaption></figure></li>
+      <li><figure><img data-img="settings" src="img/settings-en.png" width="320" height="240" loading="lazy" alt="" data-alt-fr="Réglages" data-alt-en="Settings"><figcaption data-cap-fr="Réglages" data-cap-en="Settings"></figcaption></figure></li>
+      <li><figure><img data-img="climate" src="img/climate-en.png" width="320" height="240" loading="lazy" alt="" data-alt-fr="Température et humidité (DHT22)" data-alt-en="Temperature and humidity (DHT22)"><figcaption data-cap-fr="Température et humidité (DHT22)" data-cap-en="Temperature and humidity (DHT22)"></figcaption></figure></li>
+      <li><figure><img data-img="weather" src="img/weather-en.png" width="320" height="240" loading="lazy" alt="" data-alt-fr="Météo (3 jours)" data-alt-en="Weather (3 days)"><figcaption data-cap-fr="Météo (3 jours)" data-cap-en="Weather (3 days)"></figcaption></figure></li>
+      <li><figure><img data-img="radio-off" src="img/radio-off-en.png" width="320" height="240" loading="lazy" alt="" data-alt-fr="Radio : à l'arrêt" data-alt-en="Radio: stopped"><figcaption data-cap-fr="Radio : à l'arrêt" data-cap-en="Radio: stopped"></figcaption></figure></li>
+      <li><figure><img data-img="radio-on" src="img/radio-on-en.png" width="320" height="240" loading="lazy" alt="" data-alt-fr="Radio : en direct" data-alt-en="Radio: on air"><figcaption data-cap-fr="Radio : en direct" data-cap-en="Radio: on air"></figcaption></figure></li>
+      <li><figure><img data-img="sleep" src="img/sleep-en.png" width="320" height="240" loading="lazy" alt="" data-alt-fr="Veille (radio + minuterie)" data-alt-en="Sleep (radio + timer)"><figcaption data-cap-fr="Veille (radio + minuterie)" data-cap-en="Sleep (radio + timer)"></figcaption></figure></li>
+      <li><figure><img data-img="ring-melody" src="img/ring-melody-en.png" width="320" height="240" loading="lazy" alt="" data-alt-fr="Sonnerie : mélodie" data-alt-en="Ringing: melody"><figcaption data-cap-fr="Sonnerie : mélodie" data-cap-en="Ringing: melody"></figcaption></figure></li>
+      <li><figure><img data-img="ring-radio-live" src="img/ring-radio-live-en.png" width="320" height="240" loading="lazy" alt="" data-alt-fr="Sonnerie : radio en direct" data-alt-en="Ringing: radio on air"><figcaption data-cap-fr="Sonnerie : radio en direct" data-cap-en="Ringing: radio on air"></figcaption></figure></li>
+      <li><figure><img data-img="ring-radio-failed" src="img/ring-radio-failed-en.png" width="320" height="240" loading="lazy" alt="" data-alt-fr="Sonnerie : radio muette, mélodie de secours" data-alt-en="Ringing: radio silent, backup melody"><figcaption data-cap-fr="Sonnerie : radio muette, mélodie de secours" data-cap-en="Ringing: radio silent, backup melody"></figcaption></figure></li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2 data-t="h_web"></h2>
+    <p class="muted" data-t="web_note"></p>
+    <ul class="web">
+      <li><figure><img data-webimg="web-todo" src="img/web-todo-en.png" width="800" height="1560" loading="lazy" alt="" data-alt-fr="Page À faire" data-alt-en="To-Do page"><figcaption data-cap-fr="À faire : le Post-it numérique" data-cap-en="To-Do: the digital Post-it"></figcaption></figure></li>
+      <li><figure><img data-webimg="web-location" src="img/web-location-en.png" width="800" height="1560" loading="lazy" alt="" data-alt-fr="Page Lieu" data-alt-en="Location page"><figcaption data-cap-fr="Lieu : ville de la météo, langue, fuseau" data-cap-en="Location: weather town, language, time zone"></figcaption></figure></li>
+      <li><figure><img data-webimg="web-radios" src="img/web-radios-en.png" width="800" height="2120" loading="lazy" alt="" data-alt-fr="Page Radios" data-alt-en="Radios page"><figcaption data-cap-fr="Radios : les trois stations de la montre" data-cap-en="Radios: the watch's three stations"></figcaption></figure></li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2 data-t="h_next"></h2>
+    <ul>
+      <li data-t="n1"></li>
+      <li data-t="n2"></li>
+      <li data-t="n3"></li>
+      <li data-t="n4"></li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2 data-t="h_radio"></h2>
+    <p data-t="r1"></p>
+    <ul>
+      <li data-t="r2"></li>
+      <li data-t="r3"></li>
+      <li data-t="r4"></li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2 data-t="h_help"></h2>
+    <details><summary data-t="q1"></summary><p class="muted" data-t="a1"></p></details>
+    <details><summary data-t="q2"></summary><p class="muted" data-t="a2"></p></details>
+    <details><summary data-t="q3"></summary><p class="muted" data-t="a3"></p></details>
+    <details><summary data-t="q4"></summary><p class="muted" data-t="a4"></p></details>
+    <details><summary data-t="q5"></summary><p class="muted" data-t="a5"></p></details>
+  </div>
+
+  <div class="card">
+    <h2 data-t="h_lic"></h2>
+    <p class="muted" data-t="lic"></p>
+    <p><a href="desk-watch-cyd-1.27-source.zip" data-t="src"></a></p>
+  </div>
+
+  <p class="note" data-t="note"></p>
+</main>
+<script>
+const TX={
+fr:{back:"← Desk Watch CYD (toutes les versions)",lead:"Horloge, minuteur Pomodoro, chronomètre, compteur, alarme, Post-it numérique, météo et température pour la carte ESP32 CYD (2,8 pouces), avec en plus la radio web. Installation en un clic depuis cette page.",
+h_new:"Ce que contient la version 1.27",
+w1:"<strong>Radio web</strong> : une page Radio avec trois stations, ÉCOUTER / STOP (la radio se coupe aussitôt), flèches pour changer de station, volume et réglage du bruit.",
+w2:"<strong>Alarme avec radio</strong> : le réveil peut sonner avec une mélodie ou avec l'une des trois radios. L'écran de sonnerie indique le nom du son et l'état (« En direct »). Si la radio ne démarre pas au bout de 20 secondes, la mélodie Aurora prend le relais.",
+w3:"<strong>Veille</strong> : une page Veille avec minuterie, pour s'endormir en musique. La radio baisse puis s'arrête seule, et l'écran se met en veille.",
+w4:"<strong>Une adresse unique, <code>http://cyd.local</code></strong> : À faire (Post-it), Lieu et Radios, sur téléphone ou ordinateur, sur le même Wi-Fi.",
+w5:"<strong>Météo et heure indépendantes</strong> : tu peux afficher la météo d'une ville et l'heure d'une autre. Cherche ta ville dans la page Lieu.",
+w6:"<strong>Numéro d'édition</strong> affiché au démarrage : « CYD EDITION 1.27 ».",
+h_install:"Installer sur ma carte",
+s1:"Branche la carte CYD à l'ordinateur avec un câble USB <strong>qui transmet les données</strong>.",
+s2:"Clique sur le bouton ci-dessous, choisis le port de la carte, puis <em>Install</em> (la fenêtre de l'installateur est en anglais).",
+s3:"Une fois l'installation terminée, la page te propose de <strong>connecter la carte à ton Wi-Fi</strong> : choisis ton réseau et saisis le mot de passe.",
+btn:"Installer Desk Watch 1.27",unsup:"Ce navigateur ne sait pas installer par USB. Utilise Chrome ou Edge sur ordinateur.",https:"L'installation demande une page en HTTPS.",
+browser:"Navigateur : Chrome ou Edge sur ordinateur (Windows, Mac, Linux, Chromebook). Pas Firefox ni Safari, pas de téléphone.",
+h_pics:"Les pages de la montre",pics_note:"Images de l'écran de la carte (rendu fidèle de l'interface, généré à partir du code de cette version).",
+h_web:"Les pages de cyd.local",web_note:"Sur ton téléphone ou ton ordinateur, ouvre l'adresse affichée sur la page Réglages de la carte, ou <code>http://cyd.local</code>.",
+h_next:"Ensuite",
+n1:"Ouvre <code>http://cyd.local/location</code> pour choisir la <strong>langue</strong> de la montre, la <strong>ville de la météo</strong> et, si besoin, un fuseau horaire différent. Par défaut : anglais, Hanoï. L'heure se règle ensuite toute seule par Internet.",
+n2:"Pour le Post-it : ouvre <code>http://cyd.local</code>. L'adresse IP s'affiche aussi sur la page Réglages de la carte (si <code>cyd.local</code> ne répond pas sur ton réseau, utilise cette adresse).",
+n3:"Pour la radio : ouvre <code>http://cyd.local/radios</code>, saisis le nom et l'adresse de tes trois stations, teste-les avec le bouton Tester, puis enregistre.",
+n4:"Balayage gauche/droite ou touche les noms en bas de l'écran pour changer de page. Touche l'écran pendant le démarrage, ou maintiens 3 secondes une zone vide, pour calibrer le tactile.",
+h_radio:"À savoir sur la radio",
+r1:"La carte ne lit pas toutes les radios. L'adresse du flux doit être :",
+r2:"en <strong>http://</strong> (pas https://) ;",
+r3:"un flux <strong>MP3</strong> direct (pas AAC, pas HLS, pas une liste .m3u ou .pls) ;",
+r4:"le bouton <strong>Tester</strong> de la page Radios joue l'adresse dans ton navigateur, mais il ne garantit pas que la carte saura la lire.",
+h_help:"Si ça ne marche pas",
+q1:"Le port de la carte n'apparaît pas",a1:"Essaie un autre câble USB (certains ne font que charger). Sous Windows, installe le pilote <strong>CH340</strong> ou <strong>CP210x</strong> selon la puce de ta carte, puis débranche et rebranche.",
+q2:"L'installation échoue au démarrage",a2:"Maintiens le bouton <strong>BOOT</strong> de la carte pendant que tu cliques sur <em>Install</em>, puis relâche quand l'écriture commence.",
+q3:"Je me suis trompé de Wi-Fi",a3:"Recommence l'installation : l'étape Wi-Fi est reproposée à la fin et remplace l'ancien réseau.",
+q4:"L'écran a les couleurs inversées",a4:"Dis-le-nous : une variante du firmware existe pour cet écran.",
+q5:"La radio ne démarre pas ou se coupe",a5:"Vérifie que la carte est connectée au Wi-Fi (page Réglages) et que l'adresse de la station est bien en <code>http://</code> et en MP3. Essaie une autre station pour savoir si le problème vient de la station.",
+h_lic:"Licence et code source",lic:"La radio utilise la bibliothèque ESP8266Audio, sous licence GPL-3.0. Ce firmware est donc distribué sous GPL-3.0 : tu peux le lire, le modifier et le partager, à condition de garder cette licence. Le code source de cette version est fourni ci-dessous. Pour le compiler toi-même dans l'Arduino IDE, choisis le schéma de partition <strong>Huge APP</strong> (le programme dépasse 1,3 Mo).",
+src:"Télécharger le code source de la version 1.27 (zip)",
+note:"Programme libre et gratuit pour l'éducation. Le mot de passe Wi-Fi reste dans la mémoire de ta carte : il n'est pas envoyé sur Internet."},
+en:{back:"← Desk Watch CYD (all versions)",lead:"Clock, Pomodoro timer, stopwatch, counter, alarm, digital Post-it, weather and temperature for the ESP32 CYD board (2.8 inch), now with web radio. One-click install from this page.",
+h_new:"What version 1.27 contains",
+w1:"<strong>Web radio</strong>: a Radio page with three stations, PLAY / STOP (the radio stops at once), arrows to change station, volume and a noise setting.",
+w2:"<strong>Radio alarm</strong>: the alarm can ring with a melody or with one of the three radios. The ringing screen shows the name of the sound and its state (“On air”). If the radio has not started after 20 seconds, the Aurora melody takes over.",
+w3:"<strong>Sleep</strong>: a Sleep page with a timer, to fall asleep to music. The radio fades out and stops by itself, and the screen goes to standby.",
+w4:"<strong>One address, <code>http://cyd.local</code></strong>: To-Do (Post-it), Location and Radios, on a phone or computer on the same Wi-Fi.",
+w5:"<strong>Weather and time set separately</strong>: you can show one town's weather and another town's time. Search for your town on the Location page.",
+w6:"<strong>Edition number</strong> shown at start-up: “CYD EDITION 1.27”.",
+h_install:"Install on my board",
+s1:"Plug the CYD board into your computer with a USB cable that <strong>carries data</strong>.",
+s2:"Click the button below, pick the board's port, then <em>Install</em>.",
+s3:"When the installation is done, the page offers to <strong>connect the board to your Wi-Fi</strong>: choose your network and type the password.",
+btn:"Install Desk Watch 1.27",unsup:"This browser cannot install over USB. Use Chrome or Edge on a computer.",https:"Installing requires an HTTPS page.",
+browser:"Browser: Chrome or Edge on a computer (Windows, Mac, Linux, Chromebook). Not Firefox or Safari, not a phone.",
+h_pics:"The watch pages",pics_note:"Images of the board's screen (faithful render of the interface, generated from this version's code).",
+h_web:"The cyd.local pages",web_note:"On your phone or computer, open the address shown on the board's Settings page, or <code>http://cyd.local</code>.",
+h_next:"What next",
+n1:"Open <code>http://cyd.local/location</code> to choose the watch <strong>language</strong>, the <strong>weather town</strong> and, if needed, a different time zone. Default: English, Hanoi. The time is then set automatically over the Internet.",
+n2:"For the Post-it: open <code>http://cyd.local</code>. The IP address is also shown on the board's Settings page (if <code>cyd.local</code> does not answer on your network, use that address).",
+n3:"For the radio: open <code>http://cyd.local/radios</code>, type the name and address of your three stations, try them with the Test button, then save.",
+n4:"Swipe left/right or tap the names at the bottom of the screen to change page. Touch the screen during start-up, or hold an empty area for 3 seconds, to calibrate the touch.",
+h_radio:"Good to know about the radio",
+r1:"The board cannot play every radio. The stream address must be:",
+r2:"<strong>http://</strong> (not https://);",
+r3:"a direct <strong>MP3</strong> stream (not AAC, not HLS, not an .m3u or .pls playlist);",
+r4:"the <strong>Test</strong> button on the Radios page plays the address in your browser, but it does not guarantee that the board can play it.",
+h_help:"If it does not work",
+q1:"The board's port does not appear",a1:"Try another USB cable (some only charge). On Windows, install the <strong>CH340</strong> or <strong>CP210x</strong> driver depending on your board's chip, then unplug and replug.",
+q2:"The installation fails at start",a2:"Hold the board's <strong>BOOT</strong> button while you click <em>Install</em>, and release when writing starts.",
+q3:"I chose the wrong Wi-Fi",a3:"Run the installation again: the Wi-Fi step is offered again at the end and replaces the old network.",
+q4:"The screen colours are inverted",a4:"Let us know: a firmware variant exists for that screen.",
+q5:"The radio does not start or cuts out",a5:"Check that the board is connected to Wi-Fi (Settings page) and that the station address is <code>http://</code> and MP3. Try another station to find out whether the problem comes from the station.",
+h_lic:"Licence and source code",lic:"The radio uses the ESP8266Audio library, licensed under GPL-3.0. This firmware is therefore distributed under GPL-3.0: you can read, change and share it, as long as you keep that licence. The source code of this version is provided below. To compile it yourself in the Arduino IDE, choose the <strong>Huge APP</strong> partition scheme (the program is larger than 1.3 MB).",
+src:"Download the source code of version 1.27 (zip)",
+note:"Free software for education. The Wi-Fi password stays in your board's memory: it is never sent over the Internet."}};
+
+function setLang(l,save){
+  if(!TX[l])l='en';
+  document.documentElement.lang=l;
+  document.title='Desk Watch CYD 1.27';
+  document.querySelectorAll('[data-t]').forEach(e=>{e.innerHTML=TX[l][e.dataset.t]});
+  document.querySelectorAll('[data-lang]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.lang===l)));
+  document.querySelectorAll('[data-img]').forEach(i=>{i.src='img/'+i.dataset.img+'-'+l+'.png';i.alt=i.dataset['alt'+l[0].toUpperCase()+l.slice(1)]});
+  document.querySelectorAll('[data-webimg]').forEach(i=>{i.src='img/'+i.dataset.webimg+'-'+l+'.png';i.alt=i.dataset['alt'+l[0].toUpperCase()+l.slice(1)]});
+  document.querySelectorAll('[data-cap-'+l+']').forEach(c=>{c.textContent=c.getAttribute('data-cap-'+l)});
+  if(save){try{localStorage.setItem('dwlang',l)}catch(e){}}
+}
+document.querySelectorAll('[data-lang]').forEach(b=>b.onclick=()=>setLang(b.dataset.lang,true));
+let l=null;try{l=localStorage.getItem('dwlang')}catch(e){}
+if(!l){const q=new URLSearchParams(location.search).get('lang');l=q||((navigator.language||'en').toLowerCase().startsWith('fr')?'fr':'en')}
+setLang(l,false);
+</script>
+</body>
+</html>

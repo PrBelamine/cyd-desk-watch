@@ -42,7 +42,7 @@ void sendResult(uint8_t command, const char* const* strings, size_t count) {
   data[1] = uint8_t(n - 2);
   sendPacket(PKT_RESULT, data, n);
 }
-String siteUrl() { return String("http://") + TASK_HOSTNAME + ".local/settings"; }
+String siteUrl() { return String("http://") + TASK_HOSTNAME + ".local/location"; }
 
 void reportState() {
   sendState(WiFi.status() == WL_CONNECTED ? ST_PROVISIONED : ST_READY);
