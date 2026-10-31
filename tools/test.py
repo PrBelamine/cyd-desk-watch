@@ -9,7 +9,7 @@ gxx = shutil.which('g++')
 if not gxx:
     raise SystemExit('Install g++ to run the host tests.')
 (root / '.build').mkdir(exist_ok=True)
-for name, sources in [('desk_logic_test', ['DeskLogic.cpp']), ('task_store_test', ['TaskStore.cpp']), ('improv_test', ['Improv.cpp']), ('tz_rule_test', [])]:
+for name, sources in [('desk_logic_test', ['DeskLogic.cpp', 'WeatherParse.cpp', 'TaskStore.cpp']), ('task_store_test', ['TaskStore.cpp']), ('improv_test', ['Improv.cpp']), ('tz_rule_test', [])]:
     binary = root / '.build' / name
     subprocess.run([gxx, '-std=c++17', '-Wall', '-Wextra', '-Werror', '-Wno-unused-parameter', '-I', str(root / 'tests' / 'mocks'), '-I', str(sketch),
                     str(root / 'tests' / (name + '.cpp')), *[str(sketch / s) for s in sources], '-o', str(binary)], check=True)
