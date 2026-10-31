@@ -10,7 +10,7 @@ mkdir -p "$WORK/src"
 cp "$ROOT"/Desk_Watch_CYD_V1/*.h "$ROOT"/Desk_Watch_CYD_V1/*.cpp "$WORK/src/"
 { echo '#include <Arduino.h>'; cat "$ROOT/Desk_Watch_CYD_V1/Desk_Watch_CYD_V1.ino"; } > "$WORK/src/main.cpp"
 rm -f "$WORK/src/Secrets.h"                  # never bake a Wi-Fi password into a published file
-cp "$ROOT/tools/pio/platformio.ini" "$WORK/"
+cp "$ROOT/tools/pio/platformio.ini" "$ROOT/tools/pio/patch_audio.py" "$WORK/"
 (cd "$WORK" && pio run)
 OUT="$ROOT/flasher/desk-watch/$EDITION"
 mkdir -p "$OUT"
