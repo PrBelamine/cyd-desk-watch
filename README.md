@@ -49,7 +49,7 @@ Host the folder on any HTTPS site (for example minitech.club). `flasher/desk-wat
 
 ## Install from source
 
-1. **Arduino IDE 2.x** with the **esp32 by Espressif** board package (3.x tested target) and these libraries (Library Manager): **TFT_eSPI**, **XPT2046_Touchscreen** and **ESP8266Audio** (by Earle F. Philhower, III; web radio). With the core 3.x and ESP8266Audio 2.4.1, the file `AudioOutputPDM.cpp` of that library does not compile and is not used here: see "Radio" below.
+1. **Arduino IDE 2.x** with the **esp32 by Espressif** board package (**3.2.0** is the tested version; the radio sounded duller with 3.3.x) and these libraries (Library Manager): **TFT_eSPI**, **XPT2046_Touchscreen** and **ESP8266Audio** (by Earle F. Philhower, III; web radio). With the core 3.x and ESP8266Audio 2.4.1, the file `AudioOutputPDM.cpp` of that library does not compile and is not used here: see "Radio" below.
 2. Replace `Documents/Arduino/libraries/TFT_eSPI/User_Setup.h` with `User_Setup_CYD.h` from this repository (rename it to `User_Setup.h`).
    If you already use the CYD with TFT_eSPI, your existing setup works as long as it enables `SMOOTH_FONT`.
 3. Either copy `Desk_Watch_CYD_V1/Secrets.example.h` to `Desk_Watch_CYD_V1/Secrets.h` and enter your Wi-Fi name and password, or skip this step and set the Wi-Fi later from the web installer page (Improv, over USB).
@@ -67,6 +67,7 @@ Things to know:
 - The Settings page has a **Wi-Fi OFF / ON** button next to the IP address (the Wi-Fi comes back at the next start; with a radio alarm it comes back by itself 2 minutes before the alarm).
 - The radio needs Wi-Fi; the free memory is tight (the screen buffer uses 75 KB), so very large streams may not fit.
 - If `AudioOutputPDM.cpp` of ESP8266Audio 2.4.1 stops the compilation with `data_fmt`, it is not needed: delete that file from the library's `src` folder (the firmware uses its own DAC output, `Radio.cpp`).
+- Sound quality depends on the Arduino-ESP32 core version used to compile: the web installer firmware is built with **core 3.2.0** (pinned in `tools/pio/platformio.ini`). If you compile it yourself, stay on 3.2.0 for the same sound.
 
 ## The watch's web page: `http://cyd.local`
 
