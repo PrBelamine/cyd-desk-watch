@@ -9,6 +9,7 @@
 :root{--bg:#f6f7fb;--card:#fff;--ink:#16202e;--muted:#5b6778;--accent:#0a7cff;--line:#dfe3ec;--note:#ffe14d}
 @media (prefers-color-scheme:dark){:root{--bg:#10151d;--card:#18202b;--ink:#e8edf5;--muted:#9aa6b8;--accent:#4da3ff;--line:#2a3544}}
 *{box-sizing:border-box}
+a{color:var(--accent)}
 body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
 main{max-width:760px;margin:0 auto;padding:28px 16px 56px}
 h1{font-size:1.9rem;margin:0 0 6px}
@@ -40,6 +41,12 @@ code{background:var(--bg);padding:1px 6px;border-radius:5px}
   </div>
   <h1>Desk Watch CYD</h1>
   <p class="lead" data-t="lead"></p>
+
+  <div class="card" style="border-color:var(--accent)">
+    <h2 data-t="new_h"></h2>
+    <p data-t="new_t"></p>
+    <p style="margin:0"><a href="1.27/index.html" data-t="new_a"></a></p>
+  </div>
 
   <div class="card">
     <h2 data-t="h_install"></h2>
@@ -94,7 +101,7 @@ code{background:var(--bg);padding:1px 6px;border-radius:5px}
 </main>
 <script>
 const TX={
-fr:{h_pics:"Aperçu des pages",pics_note:"Images de l'écran de la carte (rendu fidèle de l'interface).",lead:"Horloge, minuteur Pomodoro, chronomètre, compteur, alarme et Post-it numérique pour la carte ESP32 CYD (2,8 pouces). Installation en un clic depuis cette page.",
+fr:{new_h:"Nouveau : version 1.27 avec la radio",new_t:"Radio web, réveil sur la radio de ton choix, page Veille, et une page web <code>cyd.local</code> pour régler la ville, les radios et le Post-it. Installation en un clic, comme ci-dessous.",new_a:"Voir la version 1.27 et l'installer →",h_pics:"Aperçu des pages",pics_note:"Images de l'écran de la carte (rendu fidèle de l'interface).",lead:"Horloge, minuteur Pomodoro, chronomètre, compteur, alarme et Post-it numérique pour la carte ESP32 CYD (2,8 pouces). Installation en un clic depuis cette page.",
 h_install:"Installer sur ma carte",
 s1:"Branche la carte CYD à l'ordinateur avec un câble USB <strong>qui transmet les données</strong>.",
 s2:"Clique sur le bouton ci-dessous, choisis le port de la carte, puis <em>Install</em> (la fenêtre de l'installateur est en anglais).",
@@ -112,7 +119,7 @@ q2:"L'installation échoue au démarrage",a2:"Maintiens le bouton <strong>BOOT</
 q3:"Je me suis trompé de Wi-Fi",a3:"Recommence l'installation : l'étape Wi-Fi est reproposée à la fin et remplace l'ancien réseau.",
 q4:"L'écran a les couleurs inversées",a4:"Dis-le-nous : une variante du firmware existe pour cet écran.",
 note:"Programme libre et gratuit pour l'éducation. Le mot de passe Wi-Fi reste dans la mémoire de ta carte : il n'est pas envoyé sur Internet."},
-en:{h_pics:"The pages",pics_note:"Images of the board's screen (faithful render of the interface).",lead:"Clock, Pomodoro timer, stopwatch, counter, alarm and digital Post-it for the ESP32 CYD board (2.8 inch). One-click install from this page.",
+en:{new_h:"New: version 1.27 with web radio",new_t:"Web radio, wake up to the radio of your choice, a Sleep page, and a <code>cyd.local</code> web page to set the town, the radios and the Post-it. One-click install, like below.",new_a:"See version 1.27 and install it →",h_pics:"The pages",pics_note:"Images of the board's screen (faithful render of the interface).",lead:"Clock, Pomodoro timer, stopwatch, counter, alarm and digital Post-it for the ESP32 CYD board (2.8 inch). One-click install from this page.",
 h_install:"Install on my board",
 s1:"Plug the CYD board into your computer with a USB cable that <strong>carries data</strong>.",
 s2:"Click the button below, pick the board's port, then <em>Install</em>.",
