@@ -67,7 +67,7 @@ Things to know:
 - The Settings page has a **Wi-Fi OFF / ON** button next to the IP address (the Wi-Fi comes back at the next start; with a radio alarm it comes back by itself 2 minutes before the alarm).
 - The radio needs Wi-Fi; the free memory is tight (the screen buffer uses 75 KB), so very large streams may not fit.
 - If `AudioOutputPDM.cpp` of ESP8266Audio 2.4.1 stops the compilation with `data_fmt`, it is not needed: delete that file from the library's `src` folder (the firmware uses its own DAC output, `Radio.cpp`).
-- Sound quality depends on the Arduino-ESP32 core version used to compile: the web installer firmware is built with **core 3.2.0** (pinned in `tools/pio/platformio.ini`). If you compile it yourself, stay on 3.2.0 for the same sound.
+- Sound quality depends on the Arduino-ESP32 core version used to compile: the web installer firmware is built with the Arduino IDE and **core 3.2.0**. If you compile it yourself, stay on 3.2.0 for the same sound.
 
 ## The watch's web page: `http://cyd.local`
 
