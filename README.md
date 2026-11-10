@@ -10,7 +10,7 @@ It is the touchscreen port of the *Desk Watch JOY STUDENT edition* (Arduino UNO 
 ![Simulated screens](docs/screens-simulation.png)
 *Screens rendered on a PC from the real drawing code.*
 
-**Install in one click (no code):** open the install page in Chrome or Edge, plug the board in over USB and click *Install*: https://minitech.club/cyd-desk-watch/desk-watch/ (edition 1.27 with the web radio: https://minitech.club/cyd-desk-watch/desk-watch/1.27/index.html)
+**Install in one click (no code):** open the install page in Chrome or Edge, plug the board in over USB and click *Install*: https://minitech.club/cyd-desk-watch/desk-watch/ (edition 1.27 with the web radio: [https://minitech.club/cyd-desk-watch/desk-watch/1.27/index.html](https://minitech.club/go/github-cyd))
 
 **3D-printed stand:** [CYD 2.8 Display Stand - Minimalist Open Design on MakerWorld](https://makerworld.com/en/models/3513895-cyd-2-8-display-stand-minimalist-open-design) (the stand shown in the photos).
 
